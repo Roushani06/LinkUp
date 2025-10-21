@@ -19,7 +19,7 @@ const RightSidebar = ({selectedUser}) => {
       </p>
 
      </div>
-     < hr className='vorder-[#ffffff50] my-4'/>
+     <hr className='border-[#ffffff50] my-4'/>
      <div className='px-5 text-xs'>
       <p>Media</p>
      <div className='mt-2 max-h-[200px] overflow-y-scroll grid grid-cols-2 gap-4 opacity-80'>
