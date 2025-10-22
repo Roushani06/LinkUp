@@ -1,4 +1,4 @@
-import jwt, { TokenExpiredError } from 'jsonwebtoken';
+import jwt from 'jsonwebtoken';
 
 //Function to generate JWT token
 export const generateToken = (userId)=>{

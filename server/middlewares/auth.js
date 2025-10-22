@@ -2,7 +2,7 @@
 //using this middleware we can protect certain routes that can be accessed by authenticated users only.
 
 import jwt from "jsonwebtoken";
-import User from "../models/User";
+import User from "../models/User.js";
 
 //Middleware to protect routes
 export const protectRoute = async (req, res, next)=>{

@@ -3,15 +3,31 @@ import "dotenv/config";
 import cors from 'cors';
 import http from 'http';
 import { connectDB } from './lib/db.js';
+import userRouter from './routes/userRoutes.js';
+import messageRouter from './routes/messageRoutes.js';
+import { Server } from "socket.io"
+
 
 const app = express();
 const server = http.createServer(app); // using this because socket.io needs http server
+
+//Initialize socket.io server
+export const io = new Server(server, {
+    cors: {origin:"*"}
+})
+
+// store online users
+export const userSocketMap = {}; //{userId: socketId}
 
 // middlewares
 app.use(express.json({limit: '4mb'})); // to parse json data from request body and can add image of max 4mb size
 app.use(cors()); // it will allow all the URL to access our backend server
 
 app.use("/api/status", (req, res)=>res.send("server is live"));
+app.use("/api/auth", userRouter);
+app.use("/api/messages", messageRouter);
+
+
 
 //connect to MongoDB
 await connectDB();
