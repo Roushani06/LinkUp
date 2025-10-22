@@ -19,6 +19,24 @@ export const io = new Server(server, {
 // store online users
 export const userSocketMap = {}; //{userId: socketId}
 
+
+//Socket.io connection handler
+io.on("connection", (socket)=>{
+    const userId = socket.handshake.query.userId;
+    console.log("User Connected", userId);
+
+    if(userId) userSocketMap[userId] = socket.id;
+
+    // Emit online users to all connected clients
+
+    io.emit("getOnlineUsers", Object.keys(userSocketMap));
+
+    socket.on("disconnect", ()=>{
+        console.log("User Disconnected", userId);
+        delete userSocketMap[userId];
+        io.emit("getOnlineUsers", queryObjects.keys(userSocketMap))
+    })
+})
 // middlewares
 app.use(express.json({limit: '4mb'})); // to parse json data from request body and can add image of max 4mb size
 app.use(cors()); // it will allow all the URL to access our backend server
