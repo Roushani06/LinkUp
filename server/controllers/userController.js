@@ -1,5 +1,6 @@
 // in this userController.js file we will create controller function using which we can create user, allow users to login, we can authenticate user using JWT token and also can update user profile
 
+import cloudinary from "../lib/cloudinary.js";
 import { generateToken } from "../lib/utils";
 import User from "../models/User";
 import bcrypt from "bcryptjs";
@@ -66,4 +67,38 @@ export const login = async(req, res)=>{
 
     }
 }
+
+//Controller to check if user is authenticated
+export const checkAuth = (req, res)=>{
+    res.json({success: true, user: req.user});
+}
+
+// Controller to update user profile
+// they can update images also  for this we have to set up the cloudinary account so that we can upload images to cloudinary and store the image URL in our database
+
+export const updateProfile = async(req, res)=>{
+    try{
+    const {fullName, bio, profilePic} = req.body;
+
+    const userId = req.user._id;
+
+    let updatedUser;
+    if(!profilePic){
+        updatedUser = await User.findByIdAndUpdate(userId, {fullName, bio}, {new: true});
+
+    }else{
+        const upload = await cloudinary.uploader.upload(profilePic);
+
+        updatedUser = await User.findByIdAndUpdate(userId, {
+            profilePic: upload.secure_url,
+            bio,
+            fullName
+    }, {new: true});
+    res.json({success: true, user: updatedUser});
+}
+    } catch (error){
+     res.json({success: false, message: error.message});
+    }
+}
+    
 
