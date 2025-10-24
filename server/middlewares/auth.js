@@ -14,7 +14,7 @@ export const protectRoute = async (req, res, next)=>{
     const user = await User.findById(decoded.userId).select("-password");
 
     if(!user)
-return res.json({success: false, message: "Uer not found"});
+return res.json({success: false, message: "User not found"});
 
 //if user is found
     req.user = user; // it will add the user data to the request object and we can access this user data in the controller functions
