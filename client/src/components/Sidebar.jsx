@@ -1,8 +1,8 @@
 import React, { useContext, useState, useEffect } from 'react'
-import assets from '../assets/assets'
+import assets from '../assets/assets.js'
 import { useNavigate } from 'react-router-dom'
-import { AuthContext } from '../../context/AuthContext'
-import { ChatContext } from '../../context/ChatContext'
+import { AuthContext } from '../../context/AuthContext.jsx'
+import { ChatContext } from '../../context/ChatContext.jsx'
 
 
 
