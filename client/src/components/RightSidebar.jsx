@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react'
 import assets, { imagesDummyData } from '../assets/assets'
-import { ChatContext } from '../../context/chatContext'
+import { ChatContext } from '../../context/ChatContext'
 import { AuthContext } from '../../context/AuthContext'
 import { useState } from 'react'
 
