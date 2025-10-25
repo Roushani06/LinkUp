@@ -30,9 +30,10 @@ const LoginPage = () => {
 
    {/* Left Section */}
 
-   <img src={assets.logo_big} alt="" className='w-[min(30vw,250px)]'/>
-
-    {/* Right Section */}
+  <div className='flex flex-col items-center'>
+  <img src={assets.logo_icon} alt="" className='w-[min(22vw,180px)]'/>
+  <h1 className='text-white text-5xl font-bold mt-4 tracking-wide'>LinkUp</h1>
+</div>
     <form onSubmit={onSubmitHandler}
     className='border-2 bg-white/8 text-white border-gray-500 p-6 flex flex-col gap-6 rounded-lg shadow-lg'>
     <h2 className='font-medium text-2xl flex justify-between items-center'>
